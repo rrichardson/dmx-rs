@@ -95,10 +95,8 @@
 
 use std::ffi::OsStr;
 
-extern crate dmx_serial as serial;
-
-#[macro_use]
-extern crate lazy_static;
+use lazy_static::lazy_static;
+use serial;
 
 use std::{cmp, thread, time};
 
@@ -197,7 +195,6 @@ pub trait DmxTransmitter {
     /// Sends a break, followed by the specified data. Returns after buffering.
     fn send_raw_dmx_packet(&mut self, data: &[u8]) -> serial::Result<()>;
 }
-
 
 impl<T: serial::SerialPort> DmxTransmitter for T {
     #[inline(always)]
